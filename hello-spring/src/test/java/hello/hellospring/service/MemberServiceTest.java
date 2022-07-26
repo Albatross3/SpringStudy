@@ -14,27 +14,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // Test 는 한글로 바꾸어도 된다 (실제 prodution 되는 코드는 한글 x) ,test 코드는 build 시 포함 안됨
 
-// ctrl+r 이전에 실행했던 것 다시 실행
 class MemberServiceTest {
 
 //    MemberService memberService=new MemberService();
     // MemberService 에서 memberRepository 객체와 Test 에서의 memberRepository 객체가 달라서
     // 객체 변수(store) 접근시 다른 store 로 접근할 수 있다
-    // 다른 repository를 이용하기 때문에 문제가 된다
+    // 다른 repository 를 이용하기 때문에 문제가 된다
 //    MemoryMemberRepository memberRepository=new MemoryMemberRepository();
     MemberService memberService;
     MemoryMemberRepository memberRepository;
 
-    // test 전에 같은 memberRepository 를 가지도록 할 수 있다 (service와 test 모두 같음)
-    // 이와 같은 상황을 DI(Dependency Injection) 의존성 주입 이이라고 다
-    @BeforeEach
+    // test 전에 같은 memberRepository 를 가지도록 할 수 있다 (service 와 test 모두 같음)
+    // 이와 같은 상황을 DI(Dependency Injection) 의존성 주입 이라고 한다
+    @BeforeEach // 각각의 test 메소드 실행 전에 호출되어 처리
     public void beforeEach(){
         memberRepository =new MemoryMemberRepository();
         memberService=new MemberService(memberRepository);
     }
 
     // test 실행될 때마다 store 를 지우게 된다
-    @AfterEach
+    @AfterEach // 각각의 test 메소드 실행 후에 호출되어 처리
     public void afterEach(){
         memberRepository.clearStore();
     }

@@ -1,9 +1,11 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+//@Repository // container가 등록할 수 있게 됨
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long,Member> store=new HashMap<>();
@@ -16,7 +18,8 @@ public class MemoryMemberRepository implements MemberRepository{
         return member;
     }
 
-    @Override
+    // ofNullable -> 있으면 Optional 객체 , 없으면 비어있는 Optional 객체 반환환
+   @Override
     public Optional<Member> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
@@ -33,6 +36,7 @@ public class MemoryMemberRepository implements MemberRepository{
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
+
     public void clearStore(){
         store.clear();
     }
